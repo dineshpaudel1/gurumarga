@@ -1,6 +1,5 @@
 import React,{useEffect, useState} from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import TopHeader from '../../components/TopHeader/TopHeader';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
@@ -28,8 +27,6 @@ const Profile = () => {
 
   return (
       <View style={styles.container}>
-        {/* Profile Section */}
-        <TopHeader title="Profile" showNotification={true} />
         <View style={styles.profileContainer}>
           <View style={styles.avatarWrapper}>
             {/* Profile Avatar Image */}

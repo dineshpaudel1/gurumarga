@@ -2,10 +2,12 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, Text, Image } from 'react-native';
+import HomePage from '../../pages/Home/HomePage';
+import Profile from '../../pages/Profile/Profile';
 
 const HomeScreen: React.FC = () => (
   <View style={{ flex: 1 }}>
-    <Text>Home</Text>
+    <HomePage />
   </View>
 );
 
@@ -23,7 +25,7 @@ const OrderScreen: React.FC = () => (
 
 const ProfileScreen: React.FC = () => (
   <View style={{ flex: 1 }}>
-    <Text>Profile</Text>
+    <Profile />
   </View>
 );
 

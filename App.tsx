@@ -33,7 +33,7 @@ const App: React.FC = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="GetStarted">
-        <Stack.Screen name="BottomTabNavigation"component={BottomTabNavigation} options={{ headerShown: false }}/>
+        <Stack.Screen name="BottomTabNavigation"component={BottomTabNavigation} options={{header: () => <Header />,}}/>
         <Stack.Screen name="Login"component={Login} options={{ headerShown: false }}/>
         <Stack.Screen name="GetStarted"component={GetStarted} options={{ headerShown: false }}/>
         <Stack.Screen name="SignUp"component={SignUp} options={{ headerShown: false }}/>
