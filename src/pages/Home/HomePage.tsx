@@ -5,6 +5,8 @@ const HomePage = () => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <TextInput placeholder="Search..." style={styles.searchBar} />
+
+      {/* Main Banner */}
       <View style={styles.bannerCard}>
         <View style={styles.textContainer}>
           <Text style={styles.bannerText}>What would you like to learn today?</Text>
@@ -14,6 +16,9 @@ const HomePage = () => {
         </View>
         <Image source={require('../../../assets/person.png')} style={styles.bannerImage} />
       </View>
+
+     
+
       <Text style={styles.categoryTitle}>Category</Text>
       <View style={styles.categoryContainer}>
         <CategoryCard icon={require('../../../assets/icons/loksewa.png')} label="Lok Sewa" />
@@ -28,6 +33,17 @@ const HomePage = () => {
         <CourseCard />
         <CourseCard />
       </View>
+       {/* Discount Banner */}
+      <Text style={styles.topRatedTitle}>Offers</Text>
+      <View style={styles.discountBanner}>
+        <Image source={require('../../../assets/offer.png')} style={styles.discountImage} />
+      </View>
+      <Text style={styles.topRatedTitle}>Recommended course</Text>
+      <View style={styles.courseContainer}>
+        <CourseCard />
+        <CourseCard />
+      </View>
+      
     </ScrollView>
   );
 };
@@ -117,6 +133,22 @@ const styles = StyleSheet.create({
     width: 100,
     height: 200,
     borderRadius: 50,
+  },
+  discountBanner: {
+    borderRadius: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+    justifyContent: 'space-between',
+  },
+  discountText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#000',
+  },
+  discountImage: {
+    width: 380,
+    height: 200,
   },
   categoryTitle: {
     fontSize: 18,
