@@ -1,28 +1,61 @@
-import React from "react";
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from "react-native";
-import { useNavigation } from "@react-navigation/native"; // Import useNavigation
-import { RootStackParamList } from "../../../App"; // Import the interface
-import { StackNavigationProp } from '@react-navigation/stack';
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  Image,
+  Alert,
+} from "react-native";
+import axios from "axios"; // Import Axios
+import { useNavigation } from "@react-navigation/native";
+import { RootStackParamList } from "../../../App";
+import { StackNavigationProp } from "@react-navigation/stack";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-type LoginScreenNavigationProp = StackNavigationProp<RootStackParamList>; // Correctly type for Login screen
+
+type LoginScreenNavigationProp = StackNavigationProp<RootStackParamList>;
 
 const Login = () => {
-  const navigation = useNavigation<LoginScreenNavigationProp>(); // Type the navigation hook
+  const navigation = useNavigation<LoginScreenNavigationProp>();
+
+  // State for input fields
+  const [username, setuserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [accessToken, setAcessToken] = useState("");
 
   // Handle Login Button Press
-  const handleLogin = () => {
-    // After login, navigate to the BottomTabNavigation screen
-    navigation.navigate("BottomTabNavigation"); // Navigate to BottomTabNavigation
+  const handleLogin = async () => {
+    try {
+      // Make API request
+      const response = await axios.post("http://10.0.2.2:8080/auth/login", {
+        username,
+        password
+      });
+      const { accessToken } = response.data;
+      console.log(response.data)
+
+      if (accessToken) {
+        // Store the accessToken in AsyncStorage (or SecureStorage for better security)
+        await AsyncStorage.setItem("accessToken", accessToken);
+
+        // Navigate to BottomTabNavigation screen after successful login
+        navigation.navigate("BottomTabNavigation");
+      } else {
+        Alert.alert("Login Failed", "Invalid credentials. Please try again.");
+      }
+    } catch (error) {
+      console.error(error);
+      Alert.alert("Error", "Something went wrong. Please try again.");
+    }
+    console.log(accessToken);
   };
+
 
   // Handle Create Account Button Press
   const handleCreateAccount = () => {
-    navigation.navigate('SignUp'); // Navigate to SignUp screen
-  };
-
-  // Handle Register Button Press (Navigate to SignUp screen)
-  const handleRegister = () => {
-    navigation.navigate('SignUp'); // Navigate to SignUp screen
+    navigation.navigate("SignUp");
   };
 
   return (
@@ -35,12 +68,16 @@ const Login = () => {
         style={styles.input}
         placeholder="Enter Phone Number or email"
         placeholderTextColor="#ccc"
+        value={username}
+        onChangeText={(text) => setuserName(text)}
       />
       <TextInput
         style={styles.input1}
         placeholder="Enter Password"
         placeholderTextColor="#ccc"
         secureTextEntry
+        value={password}
+        onChangeText={(text) => setPassword(text)}
       />
 
       {/* Forgot Password */}
@@ -60,11 +97,6 @@ const Login = () => {
           <Text style={styles.registerLink}>Create Account</Text>
         </TouchableOpacity>
       </View>
-
-      {/* Register Button */}
-      <TouchableOpacity style={styles.registerButton} onPress={handleRegister}>
-        <Text style={styles.registerButtonText}>Register</Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -136,20 +168,6 @@ const styles = StyleSheet.create({
   registerLink: {
     color: "#FF0000",
     fontSize: 14,
-    fontWeight: "bold",
-  },
-  registerButton: {
-    width: 150,
-    height: 50,
-    borderWidth: 1,
-    borderColor: "#433BFF",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 10,
-  },
-  registerButtonText: {
-    color: "#666",
-    fontSize: 16,
     fontWeight: "bold",
   },
 });
