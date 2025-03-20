@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -26,38 +26,39 @@ const Profile = () => {
 
 
   return (
-      <View style={styles.container}>
-        <View style={styles.profileContainer}>
-          <View style={styles.avatarWrapper}>
-            {/* Profile Avatar Image */}
-            <Image
-              source={require('../../../assets/Profileicon/profile.png')}
-              style={styles.avatar}
-            />
-          </View>
-         
-          <Text style={styles.profileName}>Dinesh Paudel</Text>
-          <Text style={styles.phoneNumber}>9847503434</Text> 
+    <View style={styles.container}>
+      <View style={styles.profileContainer}>
+        <View style={styles.avatarWrapper}>
+          {/* Profile Avatar Image */}
+          <Image
+            source={require('../../../assets/Profileicon/profile.png')}
+            style={styles.avatar}
+          />
         </View>
 
-        {/* Info Cards */}
-        <View style={{ width: '90%', marginLeft: 20 }}>
-          <View style={styles.cardContainer}>
-            <TouchableOpacity
-              style={styles.card}
-              onPress={() => navigation.navigate('ClientInformation')}
-            >
-              <View style={styles.iconLabel}>
-                <Image source={require('../../../assets/Profileicon/infof.png')} style={styles.icon} />
-                <View style={styles.textContainer}>
-                  <Text style={styles.cardTitle}>My Information</Text>
-                  <Text style={styles.cardSubtitle}>View your personal details</Text>
-                </View>
+        <Text style={styles.profileName}>Dinesh Paudel</Text>
+        <Text style={styles.profileName}>Iam currently live in Nepal</Text>
+        <Text style={styles.phoneNumber}>9847503434</Text>
+      </View>
+
+      {/* Info Cards */}
+      <View style={{ width: '90%', marginLeft: 20 }}>
+        <View style={styles.cardContainer}>
+          <TouchableOpacity
+            style={styles.card}
+            onPress={() => navigation.navigate('ClientInformation')}
+          >
+            <View style={styles.iconLabel}>
+              <Image source={require('../../../assets/Profileicon/infof.png')} style={styles.icon} />
+              <View style={styles.textContainer}>
+                <Text style={styles.cardTitle}>My Information</Text>
+                <Text style={styles.cardSubtitle}>View your personal details</Text>
               </View>
-            </TouchableOpacity>
-          </View>
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
+    </View>
 
   );
 };
